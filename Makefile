@@ -18,6 +18,7 @@ deploy: utils
 	@ghr -t $(GITHUB_TOKEN) -u $(CIRCLE_PROJECT_USERNAME) -r $(CIRCLE_PROJECT_REPONAME) $(SHORT_GIT_HASH) dist/
 
 dockerhub: deploy
+	set -x
 	@docker login -u $(DOCKER_USER) -p $(DOCKER_PASS)
 	docker build -t $(DOCKER_USER)/$(CIRCLE_PROJECT_REPONAME):$(SHORT_GIT_HASH) .
 	docker push $(DOCKER_USER)/$(CIRCLE_PROJECT_REPONAME):$(SHORT_GIT_HASH)
