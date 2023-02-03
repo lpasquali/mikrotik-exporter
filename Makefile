@@ -15,7 +15,7 @@ utils:
 	
 deploy: utils
 	CGO_ENABLED=0 gox -os="linux freebsd netbsd" -arch="amd64 arm arm64 386" -parallel=4 -ldflags "$(LDFLAGS)" -output "dist/mikrotik-exporter_{{.OS}}_{{.Arch}}"
-	@ghr -t $(GITHUB_TOKEN) -u $(CIRCLE_PROJECT_USERNAME) -r $(CIRCLE_PROJECT_REPONAME) $(SHORT_GIT_HASH) dist/
+	@ghr -t $(GITHUB_TOKEN) -u $(CIRCLE_PROJECT_USERNAME) -r $(CIRCLE_PROJECT_REPONAME) -c "${CIRCLE_SHA1}" $(SHORT_GIT_HASH) dist/
 
 dockerhub: deploy
 	set -x
