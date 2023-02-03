@@ -1,8 +1,6 @@
 version: 2.1
 jobs:
   build:
-    environment:
-      SHORTSHA: $(git rev-parse --short HEAD)
     docker:
       - image: cimg/go:1.18.10     
     steps:
@@ -10,20 +8,17 @@ jobs:
       - setup_remote_docker:
           version: 20.10.18
       - run: 
-          environment: 
-            PATH: "$PATH:$GOPATH/bin"
-            SHORTSHA: "${CIRCLE_SHA1:0:8}" 
           command: |
+            export PATH=$PATH:$GOPATH/bin
+            export SHORTSHA=${CIRCLE_SHA1:0:8}
             make utils
       - run:
-          environment: 
-            PATH: "$PATH:$GOPATH/bin"
-            SHORTSHA: "${CIRCLE_SHA1:0:8}"  
           command: |
+            export PATH=$PATH:$GOPATH/bin
+            export SHORTSHA=${CIRCLE_SHA1:0:8}
             make deploy
       - run:
-          environment: 
-            PATH: "$PATH:$GOPATH/bin"
-            SHORTSHA: "${CIRCLE_SHA1:0:8}"  
           command: |
+            export PATH=$PATH:$GOPATH/bin
+            export SHORTSHA=${CIRCLE_SHA1:0:8}
             make dockerhub
