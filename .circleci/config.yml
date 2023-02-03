@@ -11,6 +11,7 @@ jobs:
           command: |
             export PATH=$PATH:$GOPATH/bin
             export SHORTSHA=${CIRCLE_SHA1:0:8}
+            
             make utils
       - run:
           command: |
