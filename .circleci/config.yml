@@ -1,16 +1,14 @@
-version: 2
+version: 2.1
 jobs:
   build:
+    environment:
+      SHORTSHA: $(git rev-parse --short HEAD)
     docker:
       - image: cimg/go:1.18.10     
-    branches:
-      only:
-        - trunk
-        - /^nshttpd.*/
     steps:
       - checkout
       - setup_remote_docker:
-          version: 18.06.0-ce
+          version: 20.10.18
       - run: env PATH=$PATH:$GOPATH/bin make utils
       - run: env PATH=$PATH:$GOPATH/bin make deploy
       - run: env PATH=$PATH:$GOPATH/bin make dockerhub
