@@ -2,7 +2,8 @@ version: 2
 jobs:
   build:
     environment:
-      SHORT_GIT_HASH: $(echo $CIRCLE_SHA1 | cut -c -7)
+      SHORT_GIT_HASH: $(git rev-parse --short HEAD)
+      
     docker:
       - image: cimg/go:1.18.10
     branches:
