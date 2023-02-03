@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/golang:1.17-buster-node-browsers-legacy
+      - image: cimg/go:1.20.0-browsers
     branches:
       only:
         - trunk
