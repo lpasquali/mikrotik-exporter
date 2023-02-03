@@ -14,4 +14,6 @@ jobs:
       - checkout
       - setup_remote_docker:
           version: 18.06.0-ce
+      - run: env PATH=$PATH:$GOPATH/bin make utils
+      - run: env PATH=$PATH:$GOPATH/bin make deploy
       - run: env PATH=$PATH:$GOPATH/bin make dockerhub
