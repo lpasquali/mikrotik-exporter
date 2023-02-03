@@ -9,6 +9,21 @@ jobs:
       - checkout
       - setup_remote_docker:
           version: 20.10.18
-      - run: env PATH=$PATH:$GOPATH/bin SHORTSHA=${CIRCLE_SHA1:0:8} make utils
-      - run: env PATH=$PATH:$GOPATH/bin SHORTSHA=${CIRCLE_SHA1:0:8} make deploy
-      - run: env PATH=$PATH:$GOPATH/bin SHORTSHA=${CIRCLE_SHA1:0:8} make dockerhub
+      - run: 
+          environment: 
+            PATH: "$PATH:$GOPATH/bin"
+            SHORTSHA: "${CIRCLE_SHA1:0:8}" 
+          command: |
+            make utils
+      - run:
+          environment: 
+            PATH: "$PATH:$GOPATH/bin"
+            SHORTSHA: "${CIRCLE_SHA1:0:8}"  
+          command: |
+            make deploy
+      - run:
+          environment: 
+            PATH: "$PATH:$GOPATH/bin"
+            SHORTSHA: "${CIRCLE_SHA1:0:8}"  
+          command: |
+            make dockerhub
