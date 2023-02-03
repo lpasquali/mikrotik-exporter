@@ -10,8 +10,8 @@ build:
 	go build -ldflags "$(LDFLAGS)" .
 
 utils:
-	go get github.com/mitchellh/gox
-	go get github.com/tcnksm/ghr
+	go install github.com/mitchellh/gox
+	go install github.com/tcnksm/ghr
 
 deploy: utils
 	CGO_ENABLED=0 gox -os="linux freebsd netbsd" -arch="amd64 arm arm64 386" -parallel=4 -ldflags "$(LDFLAGS)" -output "dist/mikrotik-exporter_{{.OS}}_{{.Arch}}"
